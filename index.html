@@ -12,6 +12,7 @@
 
   <div id="header">
     <img src="https://www.yoti.com/images/logo.svg" alt="">
+    <p id="itemArray"></p>
     <p>Check if a person has been ID validated or add them to the validated list</p>
   </div>
 
@@ -21,7 +22,7 @@
 <script type="text/babel">
   var destination = document.querySelector("#container");
 
-  var TodoItems = React.createClass({
+  var TodoItems = React.createClass({ // Creates the list of all the items that have been created
     render: function() {
       var todoEntries = this.props.entries;
 
@@ -31,6 +32,9 @@
 
       var listItems = todoEntries.map(createTasks);
 
+      console.log(listItems);
+      document.getElementById('itemArray').innerHTML = listItems.item.text;
+
       return (
         <ul className="theList">
           {listItems}
@@ -39,7 +43,9 @@
     }
   });
 
-  var TodoList = React.createClass({
+
+
+  var TodoList = React.createClass({ // Adds items to the list
     getInitialState: function() {
       return {
         items: []
