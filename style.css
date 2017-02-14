@@ -5,6 +5,9 @@ body {
 
 #header {
   text-align: center;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 img {
@@ -14,6 +17,9 @@ img {
 
 #container {
   text-align: center;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .todoListMain .header input {
@@ -40,7 +46,7 @@ img {
   list-style: none;
   padding-left: 0;
   width: 255px;
-  margin-left: 35%;
+  margin-left: 40%;
 }
 
 .todoListMain .theList li {
