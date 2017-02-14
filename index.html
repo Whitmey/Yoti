@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Yoti</title>
+  <title>Yoti | Your Digital Identity</title>
   <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
   <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="https://www.yoti.com/images/favicons/favicon-196x196.png">
 </head>
 <body>
+
+  <div id="header">
+    <img src="https://www.yoti.com/images/logo.svg" alt="">
+    <p>Check if a person has been ID validated or add them to the validated list</p>
+  </div>
 
   <div id="container">
   </div>
@@ -15,20 +21,63 @@
 <script type="text/babel">
   var destination = document.querySelector("#container");
 
-  var TodoList = React.createClass({
+  var TodoItems = React.createClass({
     render: function() {
-        return (
-          <div className="todoListMain">
-            <div className="header">
-              <form>
-                <input placeholder="enter task">
-                </input>
-                <button type="submit">add</button>
-              </form>
-            </div>
-          </div>
-        );
+      var todoEntries = this.props.entries;
+
+      function createTasks(item) {
+        return <li key={item.key}>{item.text}</li>
       }
+
+      var listItems = todoEntries.map(createTasks);
+
+      return (
+        <ul className="theList">
+          {listItems}
+        </ul>
+      );
+    }
+  });
+
+  var TodoList = React.createClass({
+    getInitialState: function() {
+      return {
+        items: []
+      };
+    },
+    addItem: function(e) {
+      var itemArray = this.state.items;
+
+      itemArray.push(
+        {
+          text: this._inputElement.value,
+          key: Date.now()
+        }
+      );
+
+      this.setState({
+        items: itemArray
+      });
+
+      this._inputElement.value = "";
+
+      e.preventDefault();
+    },
+    render: function() {
+      return (
+        <div className="todoListMain">
+          <div className="header">Add someone to the list
+            <form onSubmit={this.addItem}>
+              <input ref={(a) => this._inputElement = a}
+                     placeholder="Enter Name">
+              </input>
+              <button type="submit">Add to list</button>
+            </form>
+          </div>
+          <TodoItems entries={this.state.items}/>
+        </div>
+      );
+    }
   });
 
   ReactDOM.render(
